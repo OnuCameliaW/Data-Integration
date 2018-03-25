@@ -1,0 +1,65 @@
+DROP TABLE IF EXISTS versions;
+DROP TABLE IF EXISTS documents;
+DROP TABLE IF EXISTS employees;
+
+CREATE TABLE employees (
+	id NUMERIC(4) CONSTRAINT pk_employee PRIMARY KEY,
+	first_name VARCHAR(30),
+	last_name VARCHAR(30),
+	userName VARCHAR(30),
+	position VARCHAR(50)
+);
+
+INSERT INTO employees VALUES(2, 'Marta', 'Dobos', 'dmarta','Project Manager');
+INSERT INTO employees VALUES(1, 'Camelia', 'Onu', 'ocamelia','Developer');
+INSERT INTO employees VALUES(3, 'Adelina', 'Ichim', 'iadelia','Manager');
+INSERT INTO employees VALUES(4, 'Elena', 'Balan', 'ocamelia','Developer');
+
+CREATE TABLE documents (
+	id numeric(16) CONSTRAINT pk_document PRIMARY KEY,
+	name VARCHAR(50),
+	description VARCHAR(200), 
+	current_version NUMERIC(10),
+	create_date DATE,
+	modify_date DATE,
+	delete_date DATE,
+	file BYTEA,
+	author_id NUMERIC(4),
+	CONSTRAINT fk_author FOREIGN KEY (author_id) REFERENCES employees(id)
+);
+
+INSERT INTO documents VALUES(111,'Project A Roadmap', 'This document discribes the next steps to follow!', 1201, '01-12-2016', '20-03-2018', null, null, 2);
+INSERT INTO documents VALUES(112,'Technical Documentation Project A', 'This document discribes the next steps to follow!', 1511, '01-12-2017', '23-03-2018', null, null, 4);
+INSERT INTO documents VALUES(113,'Packages Project A', 'This document discribes the next steps to follow!', 1111, '01-02-2018', null, null, null, 4);
+INSERT INTO documents VALUES(114,'Budget and Resources Project A', 'This document discribes the next steps to follow!', 1203, '01-10-2016', '20-03-2017', null, null, 3);
+INSERT INTO documents VALUES(115,'Project B Roadmap', 'This document discribes the next steps to follow!', 1131, '01-06-2016', '20-10-2017', null, null, 3);
+INSERT INTO documents VALUES(116,'Packages Project B', 'This document discribes the next steps to follow!', 1111, '01-02-2018', null, null, null, 1);
+
+CREATE TABLE versions (
+	id VARCHAR(16) CONSTRAINT pk_version PRIMARY KEY,
+	version_number NUMERIC(10),
+	description VARCHAR(200), 
+	current_version BOOLEAN,
+	create_date DATE,
+	file BYTEA,
+	document_id NUMERIC(16),
+	CONSTRAINT fk_document FOREIGN KEY (document_id) REFERENCES documents(id)
+);
+
+INSERT INTO versions VALUES(1, 1201,'modified due to some resons', true, '20-03-2018', null, 111);
+INSERT INTO versions VALUES(2, 1191,'modified due to some resons', false, '13-05-2017', null, 111);
+INSERT INTO versions VALUES(3, 1118,'modified due to some resons', false, '20-11-2017', null, 111);
+INSERT INTO versions VALUES(4, 1111,'modified due to some resons', false, '01-12-2016', null, 111);
+INSERT INTO versions VALUES(5, 1511,'modified due to some resons', true, '23-03-2018', null, 112);
+INSERT INTO versions VALUES(6, 1191,'modified due to some resons', false, '13-05-2017', null, 112);
+INSERT INTO versions VALUES(7, 1118,'modified due to some resons', false, '20-11-2017', null, 112);
+INSERT INTO versions VALUES(8, 1111,'modified due to some resons', false, '01-12-2017', null, 112);
+INSERT INTO versions VALUES(9, 1111,'modified due to some resons', true, '01-02-2018', null, 113);
+INSERT INTO versions VALUES(10, 1203,'modified due to some resons', true, '20-03-2018', null, 114);
+INSERT INTO versions VALUES(11, 1118,'modified due to some resons', false, '20-11-2017', null, 114);
+INSERT INTO versions VALUES(12, 1111,'modified due to some resons', false, '01-10-2016', null, 114);
+INSERT INTO versions VALUES(13, 1131,'modified due to some resons', true, '20-10-2017', null, 115);
+INSERT INTO versions VALUES(14, 1118,'modified due to some resons', false, '20-01-2017', null, 115);
+INSERT INTO versions VALUES(15, 1111,'modified due to some resons', false, '01-06-2016', null, 115);
+INSERT INTO versions VALUES(16, 1111,'modified due to some resons', true, '01-02-2018', null, 116);
+
