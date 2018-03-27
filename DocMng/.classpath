@@ -33,6 +33,9 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="C:/Users/balan/eclipse/postgresql-42.2.2.jre7.jar"/>
+	<classpathentry kind="lib" path="E:/Facultate/Master/an2-master/DataIntegration_Elena/jars/bson-3.0.0.jar"/>
+	<classpathentry kind="lib" path="E:/Facultate/Master/an2-master/DataIntegration_Elena/jars/mongodb-driver-3.0.0.jar"/>
+	<classpathentry kind="lib" path="E:/Facultate/Master/an2-master/DataIntegration_Elena/jars/mongodb-driver-core-3.0.0.jar"/>
+	<classpathentry kind="lib" path="E:/Facultate/Master/an2-master/DataIntegration_Elena/jars/postgresql-42.2.2.jre7.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
